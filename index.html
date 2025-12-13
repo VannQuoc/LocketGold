@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Locket Gold Installer - Premium Unlock</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- 1. GLOBAL VARIABLES & RESET --- */
+        :root {
+            /* Palette màu: Gold & Dark Blue */
+            --primary: #fbbf24;       /* Màu vàng chính */
+            --primary-dark: #d97706;  /* Vàng đậm */
+            --bg-dark: #0f172a;       /* Nền tối */
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #312e81 100%);
+            
+            /* Glassmorphism */
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-blur: blur(20px);
+            
+            /* Text Colors */
+            --text-main: #ffffff;
+            --text-sub: #94a3b8;
+            
+            /* Status Colors */
+            --danger: #ef4444;
+            --success: #10b981;
+            
+            /* Spacing */
+            --radius-md: 16px;
+            --radius-lg: 24px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Be Vietnam Pro', sans-serif; }
+        
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden; /* Tránh thanh cuộn ngang */
+        }
+
+        /* --- 2. LAYOUT COMPONENTS --- */
+        .app-container {
+            width: 100%;
+            max-width: 600px; /* Độ rộng tối ưu cho mobile/tablet */
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            margin-top: 20px;
+            margin-bottom: 80px; /* Chừa chỗ cho nút Donate */
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            animation: slideUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+            position: relative;
+        }
+
+        header { text-align: center; margin-bottom: 35px; }
+        .logo-icon { font-size: 3.5rem; color: var(--primary); margin-bottom: 10px; filter: drop-shadow(0 0 15px rgba(251,191,36,0.4)); }
+        .app-title { font-size: 1.8rem; font-weight: 800; background: linear-gradient(to right, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 5px; }
+        .app-desc { color: var(--text-sub); font-size: 0.95rem; }
+
+        /* --- 3. PLATFORM SELECTOR --- */
+        .platform-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .platform-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            padding: 25px 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .platform-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-5px); border-color: var(--primary); }
+        .platform-card i { font-size: 2.5rem; margin-bottom: 12px; display: block; }
+        .platform-card.ios i { color: #fff; }
+        .platform-card.android i { color: #3ddc84; }
+        .platform-label { font-weight: 600; font-size: 1.1rem; }
+
+        /* --- 4. CONTENT SECTIONS & STEPS --- */
+        .view-section { display: none; animation: fadeIn 0.4s ease-out; }
+        
+        .step-item {
+            background: rgba(0,0,0,0.2);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .step-header { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
+        .step-badge { background: var(--primary); color: #000; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 0.9rem; }
+        .step-title { font-weight: 700; color: var(--primary); font-size: 1.1rem; }
+        
+        .step-desc { color: var(--text-sub); line-height: 1.6; font-size: 0.95rem; margin-bottom: 15px; }
+        .step-desc strong { color: #fff; }
+
+        /* --- 5. MEDIA PLACEHOLDER (Ảnh/Video) --- */
+        .media-placeholder {
+            width: 100%;
+            height: 180px; /* Chiều cao cố định hoặc auto */
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            border: 1px dashed var(--glass-border);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-sub);
+            margin: 15px 0;
+            overflow: hidden;
+            position: relative;
+        }
+        .media-placeholder img, .media-placeholder video { width: 100%; height: 100%; object-fit: cover; }
+        .media-hint { font-size: 0.85rem; margin-top: 8px; font-style: italic; }
+
+        /* --- 6. BUTTONS & ACTIONS --- */
+        .btn {
+            width: 100%; padding: 14px; border-radius: 12px; border: none; cursor: pointer;
+            font-weight: 700; font-size: 1rem; display: flex; justify-content: center; align-items: center; gap: 8px;
+            text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .btn:active { transform: scale(0.98); }
+
+        .btn-primary { background: linear-gradient(90deg, var(--primary), var(--primary-dark)); color: #000; }
+        .btn-success { background: linear-gradient(90deg, #10b981, #059669); color: white; }
+        .btn-outline { background: transparent; border: 1px solid var(--glass-border); color: var(--text-sub); width: auto; padding: 8px 16px; margin-bottom: 20px; font-size: 0.9rem; }
+        .btn-outline:hover { background: rgba(255,255,255,0.05); color: #fff; }
+        
+        /* Load More Button */
+        .btn-loadmore { background: rgba(255,255,255,0.08); color: #fff; margin-top: 15px; border: 1px dashed var(--glass-border); }
+
+        /* --- 7. ACCOUNT CARDS (ID APPLE) --- */
+        .id-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            animation: fadeIn 0.5s;
+        }
+        .id-header { display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 10px; color: var(--text-sub); }
+        .status-dot { width: 8px; height: 8px; background: var(--success); border-radius: 50%; display: inline-block; margin-right: 5px; }
+        .status-offline { background: var(--danger); }
+
+        /* Input Group cho ID/Pass */
+        .copy-box {
+            display: flex; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border);
+            border-radius: 8px; margin-bottom: 8px; overflow: hidden;
+        }
+        .copy-icon { width: 40px; display: flex; align-items: center; justify-content: center; color: var(--text-sub); background: rgba(255,255,255,0.02); border-right: 1px solid var(--glass-border); }
+        .copy-content { flex: 1; padding: 10px; font-family: 'Monaco', monospace; font-size: 0.9rem; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .copy-action { background: transparent; border: none; color: var(--primary); width: 45px; cursor: pointer; border-left: 1px solid var(--glass-border); transition: 0.2s; }
+        .copy-action:hover { background: var(--primary); color: #000; }
+
+        /* --- 8. FLOATING DONATE & MODALS --- */
+        .donate-btn {
+            position: fixed; bottom: 25px; right: 25px;
+            background: linear-gradient(135deg, #ec4899, #8b5cf6);
+            color: #fff; padding: 12px 24px; border-radius: 50px;
+            font-weight: 700; cursor: pointer; box-shadow: 0 5px 20px rgba(236, 72, 153, 0.4);
+            display: flex; align-items: center; gap: 8px; z-index: 100; transition: 0.3s;
+        }
+        .donate-btn:hover { transform: translateY(-5px) scale(1.05); }
+
+        .modal {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
+            z-index: 999; display: none; justify-content: center; align-items: center; padding: 20px;
+        }
+        .modal.active { display: flex; }
+        .modal-box {
+            background: #1e293b; width: 100%; max-width: 420px; padding: 30px; border-radius: 24px;
+            text-align: center; border: 1px solid var(--glass-border); position: relative;
+            animation: slideUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .modal-icon { font-size: 3rem; margin-bottom: 15px; }
+        .modal h3 { font-size: 1.4rem; color: #fff; margin-bottom: 10px; }
+        .modal-list { text-align: left; margin: 15px 0 25px 0; color: var(--text-sub); list-style: none; }
+        .modal-list li { margin-bottom: 10px; display: flex; gap: 10px; }
+        .modal-list li i { color: var(--primary); margin-top: 4px; }
+        
+        /* QR Code Area */
+        .qr-area {
+            background: #fff; padding: 10px; border-radius: 12px; margin: 20px auto;
+            width: 200px; height: 200px; display: flex; align-items: center; justify-content: center;
+        }
+        .qr-area img { width: 100%; height: 100%; object-fit: contain; }
+
+        /* Toast */
+        #toast {
+            position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%);
+            background: #334155; color: #fff; padding: 12px 24px; border-radius: 50px;
+            font-weight: 500; opacity: 0; visibility: hidden; transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3); border: 1px solid var(--glass-border); z-index: 1000;
+        }
+        #toast.show { opacity: 1; visibility: visible; bottom: 100px; }
+
+        /* Animations */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .spinner { width: 30px; height: 30px; border: 3px solid rgba(255,255,255,0.1); border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 20px auto; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <header>
+            <div class="logo-icon"><i class="fa-solid fa-bolt"></i></div>
+            <h1 class="app-title">Locket Gold Installer</h1>
+            <p class="app-desc">Hướng dẫn cài đặt & Mở khoá Premium miễn phí</p>
+        </header>
+
+        <div id="view-home" class="platform-grid">
+            <div class="platform-card ios" onclick="nav.to('ios')">
+                <i class="fab fa-apple"></i>
+                <div class="platform-label">iPhone / iPad</div>
+            </div>
+            <div class="platform-card android" onclick="nav.to('android')">
+                <i class="fab fa-android"></i>
+                <div class="platform-label">Android</div>
+            </div>
+        </div>
+
+        <section id="view-android" class="view-section">
+            <button class="btn btn-outline" onclick="nav.home()"><i class="fa-solid fa-arrow-left"></i> Quay lại</button>
+            
+            <div class="step-item">
+                <div class="step-header">
+                    <div class="step-badge">1</div>
+                    <div class="step-title">Tải File APK Mod</div>
+                </div>
+                <div class="step-desc">Tải file cài đặt đã được mở khóa tính năng Locket Gold sẵn.</div>
+                <a href="#" class="btn btn-primary"><i class="fa-solid fa-download"></i> Tải APK Ngay</a>
+            </div>
+
+            <div class="step-item">
+                <div class="step-header">
+                    <div class="step-badge">2</div>
+                    <div class="step-title">Hướng dẫn cài đặt</div>
+                </div>
+                <div class="step-desc">Mở file vừa tải và chọn "Cài đặt". Nếu máy hỏi quyền, hãy chọn <strong>Cho phép từ nguồn này</strong>.</div>
+                
+                <div class="media-placeholder">
+                    <i class="fa-regular fa-image" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                    <span>(Chỗ để ảnh/video hướng dẫn cài APK)</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-ios" class="view-section">
+            <button class="btn btn-outline" onclick="nav.home()"><i class="fa-solid fa-arrow-left"></i> Quay lại</button>
+
+            <div class="step-item">
+                <div class="step-header">
+                    <div class="step-badge">1</div>
+                    <div class="step-title">Lấy ID Apple & Tải Shadowrocket</div>
+                </div>
+                <div class="step-desc">
+                    Sử dụng tài khoản dưới đây để đăng nhập <strong>App Store</strong> (Tuyệt đối KHÔNG đăng nhập iCloud trong Cài đặt).
+                </div>
+
+                <div id="id-area" style="display:none;">
+                    <div id="loading-spinner" class="spinner"></div>
+                    <div id="id-list"></div>
+                    <button id="btn-loadmore" class="btn btn-loadmore" onclick="dataManager.loadMore()">
+                        Xem thêm tài khoản <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                </div>
+
+                <button id="btn-fetch" class="btn btn-primary" onclick="ui.openModal('warning-modal')">
+                    <i class="fa-brands fa-apple"></i> Lấy Danh Sách ID
+                </button>
+            </div>
+
+            <div class="step-item">
+                <div class="step-header">
+                    <div class="step-badge">2</div>
+                    <div class="step-title">Tải Shadowrocket</div>
+                </div>
+                <div class="step-desc">
+                    Vào mục <strong>Đã mua (Purchased)</strong> -> Tìm "Shadowrocket" -> Tải về máy.
+                </div>
+                <div class="media-placeholder">
+                    <i class="fa-brands fa-app-store-ios" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                    <span>(Ảnh hướng dẫn vào mục Đã mua)</span>
+                </div>
+            </div>
+
+            <div class="step-item">
+                <div class="step-header">
+                    <div class="step-badge">3</div>
+                    <div class="step-title">Cấu hình Shadowrocket</div>
+                </div>
+                <div class="step-desc">
+                    Mở app, nhấn vào nút quét QR hoặc thêm cấu hình bên dưới. Đảm bảo bật VPN.
+                </div>
+                <div class="media-placeholder">
+                    <i class="fa-solid fa-rocket" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                    <span>(Ảnh/Video hướng dẫn cấu hình App)</span>
+                </div>
+            </div>
+
+            <div class="step-item">
+                <div class="step-header">
+                    <div class="step-badge">4</div>
+                    <div class="step-title">Cài Locket Gold (OTA)</div>
+                </div>
+                <div class="step-desc">Sau khi bật VPN Shadowrocket, nhấn nút dưới đây và chọn "Cài đặt".</div>
+                <a id="link-ota" href="#" class="btn btn-success">
+                    <i class="fa-solid fa-cloud-arrow-down"></i> Cài Đặt Ngay (OTA)
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <div class="donate-btn" onclick="ui.openModal('donate-modal')">
+        <i class="fa-solid fa-heart"></i> <span>Donate</span>
+    </div>
+
+    <div id="warning-modal" class="modal">
+        <div class="modal-box">
+            <div class="modal-icon" style="color: var(--danger);"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <h3>CẢNH BÁO QUAN TRỌNG</h3>
+            <ul class="modal-list">
+                <li><i class="fa-solid fa-check"></i> Chỉ đăng nhập trong <strong>App Store</strong>.</li>
+                <li><i class="fa-solid fa-xmark" style="color:var(--danger)"></i> KHÔNG đăng nhập iCloud trong Cài đặt.</li>
+                <li><i class="fa-solid fa-shield"></i> Nếu hỏi nâng cấp bảo mật -> Chọn "Không".</li>
+            </ul>
+            <button class="btn btn-primary" onclick="dataManager.fetchIDs()">Tôi đã hiểu, Lấy ID ngay</button>
+            <button class="btn btn-outline" style="margin-top:10px; width:100%; border:none;" onclick="ui.closeModal('warning-modal')">Huỷ bỏ</button>
+        </div>
+    </div>
+
+    <div id="donate-modal" class="modal">
+        <div class="modal-box" style="background: #fff; color: #333;">
+            <h3 style="color:#000;">Cảm ơn bạn đã ủng hộ ❤️</h3>
+            <p style="color:#666; font-size: 0.9rem;">Sự ủng hộ của bạn giúp mình duy trì Server.</p>
+            
+            <div class="qr-area">
+                <img src="https://img.vietqr.io/image/mbbank-012345672110-compact.jpg?addInfo=donate%20locket%20gold&accountName=Le%20Van%20Quoc" alt="QR Code">
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                <a href="https://dl.vietqr.io/pay?app=mb" class="btn" style="background:#1e3a8a; color:#fff; font-size:0.8rem;">MB Bank</a>
+                <a href="https://dl.vietqr.io/pay?app=" class="btn" style="background:#1e3a8a; color:#fff; font-size:0.8rem;">Vietcombank>Vi>
+                <a href="#" class="btn" style="background:#d946ef; color:#fff; font-size:0.8rem;">Momo</a>
+            </div>
+            
+            <button class="btn btn-outline" style="margin-top:15px; width:100%; color:#555; border-color:#ddd;" onclick="ui.closeModal('donate-modal')">Đóng</button>
+        </div>
+    </div>
+
+    <div id="toast"><i class="fa-solid fa-check-circle"></i> Đã sao chép vào bộ nhớ tạm!</div>
+
+    <script>
+        /**
+         * --- CONFIGURATION (CẤU HÌNH) ---
+         * Bạn chỉnh sửa các thông số ở đây dễ dàng
+         */
+        const CONFIG = {
+            // Link Cloudflare Worker của bạn (Bắt buộc để lấy ID)
+            workerUrl: 'https://locket.levanquocht21.workers.dev/', 
+            
+            // Link cài OTA (File plist)
+            otaUrl: 'itms-services://?action=download-manifest&url=https://github.com/VannQuoc/LocketDowngrade/raw/main/manifest.plist',
+            
+            // Số tài khoản hiển thị mỗi lần bấm "Xem thêm"
+            itemsPerBatch: 3
+        };
+
+
+        document.getElementById('link-ota').href = CONFIG.otaUrl;
+
+        /**
+         * --- NAVIGATION & UI MANAGER ---
+         */
+        const ui = {
+            toastTimeout: null,
+
+            openModal: (id) => document.getElementById(id).classList.add('active'),
+            closeModal: (id) => document.getElementById(id).classList.remove('active'),
+
+            showToast: (msg) => {
+                const t = document.getElementById('toast');
+                t.innerHTML = `<i class="fa-solid fa-check-circle"></i> ${msg}`;
+                t.classList.add('show');
+                clearTimeout(ui.toastTimeout);
+                ui.toastTimeout = setTimeout(() => t.classList.remove('show'), 3000);
+            },
+
+            copy: (text) => {
+                if (!text || text === "...") return;
+                navigator.clipboard.writeText(text).then(() => ui.showToast(`Đã chép: ${text}`))
+                .catch(() => alert("Lỗi copy"));
+            }
+        };
+
+        const nav = {
+            to: (view) => {
+                document.getElementById('view-home').style.display = 'none';
+                document.querySelectorAll('.view-section').forEach(el => el.style.display = 'none');
+                document.getElementById('view-' + view).style.display = 'block';
+                window.scrollTo(0, 0);
+            },
+            home: () => {
+                document.querySelectorAll('.view-section').forEach(el => el.style.display = 'none');
+                document.getElementById('view-home').style.display = 'grid';
+            }
+        };
+
+        /**
+         * --- DATA MANAGER (Logic lấy ID) ---
+         */
+        const dataManager = {
+            allAccounts: [],
+            currentShown: 0,
+
+            fetchIDs: async () => {
+                ui.closeModal('warning-modal');
+                
+                const els = {
+                    btn: document.getElementById('btn-fetch'),
+                    area: document.getElementById('id-area'),
+                    loader: document.getElementById('loading-spinner'),
+                    list: document.getElementById('id-list'),
+                    error: (msg) => els.list.innerHTML = `<div style="color:var(--danger); text-align:center;">${msg}</div>`
+                };
+
+                // Check Config
+                if (!CONFIG.workerUrl || CONFIG.workerUrl.includes('workers.dev') === false) {
+                    alert("Bạn chưa cấu hình link Worker trong code!");
+                    return;
+                }
+
+                els.btn.style.display = 'none';
+                els.area.style.display = 'block';
+                els.loader.style.display = 'block';
+                els.list.innerHTML = '';
+
+                try {
+                    const res = await fetch(CONFIG.workerUrl);
+                    if (!res.ok) throw new Error("Worker Error: " + res.status);
+                    const html = await res.text();
+                    
+                    dataManager.parseData(html);
+                } catch (e) {
+                    els.error(`Lỗi kết nối: ${e.message}. Vui lòng thử lại sau.`);
+                } finally {
+                    els.loader.style.display = 'none';
+                }
+            },
+
+            parseData: (html) => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const cards = doc.querySelectorAll('main div.bg-white.rounded-2xl');
+
+                dataManager.allAccounts = [];
+
+                cards.forEach((card, i) => {
+                    // 1. Username logic
+                    let username = "...";
+                    const uSpan = card.querySelector(`span[id^="user_"]`);
+                    if (uSpan) {
+                        const cf = uSpan.querySelector('.__cf_email__');
+                        username = cf ? dataManager.decodeCF(cf.getAttribute('data-cfemail')) : uSpan.innerText.trim();
+                    }
+
+                    // 2. Password logic
+                    let password = "Xem ở web gốc";
+                    // Tìm thẻ span có id chứa 'pass'
+                    const pSpan = card.querySelector(`span[id*="pass"]`);
+                    if(pSpan) password = pSpan.innerText.trim();
+                    else {
+                        // Fallback: Tìm span thứ 2 trong card (thường là pass)
+                        const spans = card.querySelectorAll('span');
+                        spans.forEach(s => {
+                            if(!s.id.includes('user') && s.innerText.length > 5) password = s.innerText.trim();
+                        });
+                    }
+
+                    // 3. Status logic
+                    const isLive = card.innerText.includes("Hoạt động");
+
+                    dataManager.allAccounts.push({ index: i+1, username, password, isLive });
+                });
+
+                if (dataManager.allAccounts.length === 0) {
+                    document.getElementById('id-list').innerHTML = "Không tìm thấy dữ liệu.";
+                    return;
+                }
+
+                dataManager.currentShown = 0;
+                document.getElementById('id-list').innerHTML = '';
+                dataManager.loadMore();
+            },
+
+            loadMore: () => {
+                const container = document.getElementById('id-list');
+                const batch = dataManager.allAccounts.slice(dataManager.currentShown, dataManager.currentShown + CONFIG.itemsPerBatch);
+                
+                batch.forEach(acc => {
+                    const statusClass = acc.isLive ? '' : 'status-offline';
+                    const statusText = acc.isLive ? 'Hoạt động' : 'Bảo trì';
+                    
+                    const html = `
+                        <div class="id-card">
+                            <div class="id-header">
+                                <span>Account #${acc.index}</span>
+                                <div><span class="status-dot ${statusClass}"></span>${statusText}</div>
+                            </div>
+                            
+                            <div class="copy-box">
+                                <div class="copy-icon"><i class="fa-solid fa-user"></i></div>
+                                <div class="copy-content">${acc.username}</div>
+                                <button class="copy-action" onclick="ui.copy('${acc.username}')"><i class="fa-regular fa-copy"></i></button>
+                            </div>
+
+                            <div class="copy-box" style="margin-bottom:0">
+                                <div class="copy-icon"><i class="fa-solid fa-key"></i></div>
+                                <div class="copy-content">${acc.password}</div>
+                                <button class="copy-action" onclick="ui.copy('${acc.password}')"><i class="fa-regular fa-copy"></i></button>
+                            </div>
+                        </div>
+                    `;
+                    container.insertAdjacentHTML('beforeend', html);
+                });
+
+                dataManager.currentShown += batch.length;
+                
+                // Toggle Button Load More
+                const btn = document.getElementById('btn-loadmore');
+                btn.style.display = (dataManager.currentShown >= dataManager.allAccounts.length) ? 'none' : 'block';
+            },
+
+            decodeCF: (str) => {
+                let e = "", r = parseInt(str.substr(0, 2), 16);
+                for (let n = 2; n < str.length; n += 2) {
+                    let c = parseInt(str.substr(n, 2), 16) ^ r;
+                    e += String.fromCharCode(c);
+                }
+                return e;
+            }
+        };
+    </script>
+</body>
+
+</html>
