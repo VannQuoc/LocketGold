@@ -11,26 +11,17 @@
     <style>
         /* --- 1. GLOBAL VARIABLES & RESET --- */
         :root {
-            /* Palette màu: Gold & Dark Blue */
-            --primary: #fbbf24;       /* Màu vàng chính */
-            --primary-dark: #d97706;  /* Vàng đậm */
-            --bg-dark: #0f172a;       /* Nền tối */
+            --primary: #fbbf24;
+            --primary-dark: #d97706;
+            --bg-dark: #0f172a;
             --bg-gradient: linear-gradient(135deg, #0f172a 0%, #312e81 100%);
-            
-            /* Glassmorphism */
             --glass-bg: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.1);
             --glass-blur: blur(20px);
-            
-            /* Text Colors */
             --text-main: #ffffff;
             --text-sub: #94a3b8;
-            
-            /* Status Colors */
             --danger: #ef4444;
             --success: #10b981;
-            
-            /* Spacing */
             --radius-md: 16px;
             --radius-lg: 24px;
         }
@@ -44,13 +35,13 @@
             display: flex;
             justify-content: center;
             padding: 20px;
-            overflow-x: hidden; /* Tránh thanh cuộn ngang */
+            overflow-x: hidden;
         }
 
         /* --- 2. LAYOUT COMPONENTS --- */
         .app-container {
             width: 100%;
-            max-width: 600px; /* Độ rộng tối ưu cho mobile/tablet */
+            max-width: 600px;
             background: var(--glass-bg);
             backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur);
@@ -58,7 +49,7 @@
             border-radius: var(--radius-lg);
             padding: 30px;
             margin-top: 20px;
-            margin-bottom: 80px; /* Chừa chỗ cho nút Donate */
+            margin-bottom: 80px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.5);
             animation: slideUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
             position: relative;
@@ -86,7 +77,56 @@
         .platform-card.android i { color: #3ddc84; }
         .platform-label { font-weight: 600; font-size: 1.1rem; }
 
-        /* --- 4. CONTENT SECTIONS & STEPS --- */
+        /* --- 4. ACCORDION (THU GỌN) STYLES --- */
+        .accordion-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .accordion-header {
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            background: rgba(255,255,255,0.02);
+            color: var(--text-sub);
+        }
+        .accordion-header:hover { background: rgba(255,255,255,0.05); color: #fff; }
+        .accordion-header i { transition: transform 0.3s ease; }
+        
+        /* Khi accordion mở */
+        .accordion-box.active .accordion-header {
+            color: var(--primary);
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .accordion-box.active .accordion-header i { transform: rotate(180deg); }
+        
+        .accordion-content {
+            display: none; /* Mặc định ẩn */
+            padding: 15px;
+            animation: fadeIn 0.3s ease;
+        }
+        .accordion-box.active .accordion-content { display: block; }
+
+        /* Support Box Specifics */
+        .support-header-text { display: flex; align-items: center; gap: 10px; }
+        .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 5px; }
+        .btn-social {
+            padding: 10px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.85rem;
+            display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s;
+        }
+        .btn-fb { background: #1877f2; color: #fff; }
+        .btn-fb:hover { background: #155db5; }
+        .btn-insta { background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); color: #fff; }
+        .btn-insta:hover { opacity: 0.9; }
+
+        /* --- 5. CONTENT SECTIONS --- */
         .view-section { display: none; animation: fadeIn 0.4s ease-out; }
         
         .step-item {
@@ -100,60 +140,46 @@
         .step-header { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
         .step-badge { background: var(--primary); color: #000; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 0.9rem; }
         .step-title { font-weight: 700; color: var(--primary); font-size: 1.1rem; }
-        
         .step-desc { color: var(--text-sub); line-height: 1.6; font-size: 0.95rem; margin-bottom: 15px; }
         .step-desc strong { color: #fff; }
 
-        /* --- 5. MEDIA PLACEHOLDER (Ảnh/Video) --- */
+        /* Media Placeholder */
         .media-placeholder {
-            width: 100%;
-            height: auto; /* Chiều cao cố định hoặc auto */
+            width: 100%; height: auto;
             background: rgba(0,0,0,0.3);
             border-radius: 12px;
             border: 1px dashed var(--glass-border);
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            justify-content: center; align-items: center;
             color: var(--text-sub);
-            margin: 15px 0;
-            overflow: hidden;
-            position: relative;
+            margin: 15px 0; overflow: hidden; position: relative;
         }
-        .media-placeholder img, .media-placeholder video { width: 100%; height: 100%; object-fit: cover; }
-        .media-hint { font-size: 0.85rem; margin-top: 8px; font-style: italic; }
+        .media-placeholder img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* --- 6. BUTTONS & ACTIONS --- */
+        /* Buttons */
         .btn {
             width: 100%; padding: 14px; border-radius: 12px; border: none; cursor: pointer;
             font-weight: 700; font-size: 1rem; display: flex; justify-content: center; align-items: center; gap: 8px;
             text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
         }
         .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-        .btn:active { transform: scale(0.98); }
-
         .btn-primary { background: linear-gradient(90deg, var(--primary), var(--primary-dark)); color: #000; }
         .btn-success { background: linear-gradient(90deg, #10b981, #059669); color: white; }
+        .btn-purple { background: linear-gradient(90deg, #8b5cf6, #6d28d9); color: white; }
         .btn-outline { background: transparent; border: 1px solid var(--glass-border); color: var(--text-sub); width: auto; padding: 8px 16px; margin-bottom: 20px; font-size: 0.9rem; }
         .btn-outline:hover { background: rgba(255,255,255,0.05); color: #fff; }
-        
-        /* Load More Button */
         .btn-loadmore { background: rgba(255,255,255,0.08); color: #fff; margin-top: 15px; border: 1px dashed var(--glass-border); }
 
-        /* --- 7. ACCOUNT CARDS (ID APPLE) --- */
+        /* Account Cards */
         .id-card {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 15px;
-            animation: fadeIn 0.5s;
+            background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border);
+            border-radius: 12px; padding: 15px; margin-bottom: 15px; animation: fadeIn 0.5s;
         }
         .id-header { display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 10px; color: var(--text-sub); }
         .status-dot { width: 8px; height: 8px; background: var(--success); border-radius: 50%; display: inline-block; margin-right: 5px; }
         .status-offline { background: var(--danger); }
-
-        /* Input Group cho ID/Pass */
+        
         .copy-box {
             display: flex; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border);
             border-radius: 8px; margin-bottom: 8px; overflow: hidden;
@@ -163,7 +189,7 @@
         .copy-action { background: transparent; border: none; color: var(--primary); width: 45px; cursor: pointer; border-left: 1px solid var(--glass-border); transition: 0.2s; }
         .copy-action:hover { background: var(--primary); color: #000; }
 
-        /* --- 8. FLOATING DONATE & MODALS --- */
+        /* Floating Donate */
         .donate-btn {
             position: fixed; bottom: 25px; right: 25px;
             background: linear-gradient(135deg, #ec4899, #8b5cf6);
@@ -173,6 +199,7 @@
         }
         .donate-btn:hover { transform: translateY(-5px) scale(1.05); }
 
+        /* Modals */
         .modal {
             position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
             z-index: 999; display: none; justify-content: center; align-items: center; padding: 20px;
@@ -189,28 +216,11 @@
         .modal-list li { margin-bottom: 10px; display: flex; gap: 10px; }
         .modal-list li i { color: var(--primary); margin-top: 4px; }
         
-        /* QR Code Area */
-		.modal-media {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 8px;
-		margin: 12px 0;
-		}
-
-		.modal-media img {
-			width: 100%;
-			border-radius: 6px;
-			object-fit: cover;
-			cursor: pointer;
-		}
-
-        .qr-area {
-            background: #fff; padding: 10px; border-radius: 12px; margin: 20px auto;
-            width: 200px; height: 200px; display: flex; align-items: center; justify-content: center;
-        }
+        .modal-media { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0; }
+        .modal-media img { width: 100%; border-radius: 6px; object-fit: cover; }
+        .qr-area { background: #fff; padding: 10px; border-radius: 12px; margin: 20px auto; width: 200px; height: 200px; display: flex; align-items: center; justify-content: center; }
         .qr-area img { width: 100%; height: 100%; object-fit: contain; }
 
-        /* Toast */
         #toast {
             position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%);
             background: #334155; color: #fff; padding: 12px 24px; border-radius: 50px;
@@ -218,12 +228,11 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.3); border: 1px solid var(--glass-border); z-index: 1000;
         }
         #toast.show { opacity: 1; visibility: visible; bottom: 100px; }
-
-        /* Animations */
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        
         .spinner { width: 30px; height: 30px; border: 3px solid rgba(255,255,255,0.1); border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 20px auto; }
         @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
     </style>
 </head>
@@ -239,7 +248,7 @@
         <div id="view-home" class="platform-grid">
             <div class="platform-card ios" onclick="nav.to('ios')">
                 <i class="fab fa-apple"></i>
-                <div class="platform-label">iPhone / iPad (Ios)</div>
+                <div class="platform-label">iPhone / iPad (iOS)</div>
             </div>
             <div class="platform-card android" onclick="nav.to('android')">
                 <i class="fab fa-android"></i>
@@ -250,6 +259,26 @@
         <section id="view-android" class="view-section">
             <button class="btn btn-outline" onclick="nav.home()"><i class="fa-solid fa-arrow-left"></i> Quay lại</button>
             
+            <div class="accordion-box">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="support-header-text"><i class="fa-solid fa-headset"></i> Cần hỗ trợ cài đặt?</div>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="accordion-content">
+                    <div style="font-size: 0.9rem; margin-bottom: 10px; color: var(--text-sub);">
+                        Liên hệ mình qua các kênh sau để được support nhanh nhất:
+                    </div>
+                    <div class="social-grid">
+                        <a id="link-fb-android" href="#" target="_blank" class="btn-social btn-fb">
+                            <i class="fa-brands fa-facebook-f"></i> Facebook
+                        </a>
+                        <a id="link-insta-android" href="#" target="_blank" class="btn-social btn-insta">
+                            <i class="fa-brands fa-instagram"></i> Instagram
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             <div class="step-item">
                 <div class="step-header">
                     <div class="step-badge">1</div>
@@ -264,11 +293,18 @@
                     <div class="step-badge">2</div>
                     <div class="step-title">Hướng dẫn cài đặt</div>
                 </div>
-                <div class="step-desc">Mở file vừa tải và chọn "Cài đặt". Nếu máy hỏi quyền, hãy chọn <strong>Cho phép từ nguồn này</strong>.</div>
                 
-                <div class="media-placeholder">
-                    <i class="fa-regular fa-image" style="font-size: 2rem; margin-bottom: 10px;"></i>
-                    <img src="https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2023/11/app-apk-7.jpg.webp" style="max-width: 100%; height: auto; border-radius: 8px;">
+                <div class="accordion-box" style="background: rgba(0,0,0,0.3); border:none; margin-bottom: 0;">
+                    <div class="accordion-header" onclick="toggleAccordion(this)" style="padding: 10px; border-radius: 8px;">
+                        <span>Xem chi tiết hướng dẫn</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="step-desc">Mở file vừa tải và chọn "Cài đặt". Nếu máy hỏi quyền, hãy chọn <strong>Cho phép từ nguồn này</strong>.</div>
+                        <div class="media-placeholder">
+                            <img src="https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2023/11/app-apk-7.jpg.webp">
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -276,26 +312,66 @@
         <section id="view-ios" class="view-section">
             <button class="btn btn-outline" onclick="nav.home()"><i class="fa-solid fa-arrow-left"></i> Quay lại</button>
 
+            <div class="accordion-box">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="support-header-text"><i class="fa-solid fa-headset"></i> Cần hỗ trợ cài đặt?</div>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="accordion-content">
+                    <div style="font-size: 0.9rem; margin-bottom: 10px; color: var(--text-sub);">
+                        Liên hệ mình qua các kênh sau để được support nhanh nhất:
+                    </div>
+                    <div class="social-grid">
+                        <a id="link-fb-ios" href="#" target="_blank" class="btn-social btn-fb">
+                            <i class="fa-brands fa-facebook-f"></i> Facebook
+                        </a>
+                        <a id="link-insta-ios" href="#" target="_blank" class="btn-social btn-insta">
+                            <i class="fa-brands fa-instagram"></i> Instagram
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             <div class="step-item">
                 <div class="step-header">
                     <div class="step-badge">1</div>
-                    <div class="step-title">Lấy ID Apple</div>
+                    <div class="step-title">Cài đặt Shadowrocket & ID Apple</div>
                 </div>
-                <div class="step-desc">
-                    Sử dụng tài khoản dưới đây để đăng nhập <strong>App Store</strong> (Tuyệt đối KHÔNG đăng nhập iCloud trong Cài đặt).
+                
+                <div class="accordion-box" style="margin-bottom: 20px;">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <div style="font-weight: bold; color: var(--success);"><i class="fa-solid fa-bolt"></i> Cách 1: Cài Nhanh (OTA)</div>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="step-desc" style="font-size: 0.9rem;">Thử cài Shadowrocket trực tiếp không cần ID Apple.</div>
+                        <a href="itms-services://?action=download-manifest&url=https://github.com/VannQuoc/LocketDowngrade/raw/main/shadowrocket.plist" class="btn btn-purple" style="margin-bottom: 10px;">
+                            <i class="fa-solid fa-rocket"></i> Cài Shadowrocket
+                        </a>
+                        <div style="font-size: 0.8rem; color: #fca5a5; font-style: italic;">
+                            *Lưu ý: Có thể không tương thích với một số máy. Nếu lỗi, hãy dùng Cách 2 bên dưới.
+                        </div>
+                    </div>
                 </div>
 
-                <div id="id-area" style="display:none;">
-                    <div id="loading-spinner" class="spinner"></div>
-                    <div id="id-list"></div>
-                    <button id="btn-loadmore" class="btn btn-loadmore" onclick="dataManager.loadMore()">
-                        Xem thêm tài khoản <i class="fa-solid fa-chevron-down"></i>
+                <div style="border-top: 1px solid var(--glass-border); padding-top: 20px;">
+                    <div style="font-weight: bold; color: var(--primary); margin-bottom: 5px;"><i class="fa-brands fa-apple"></i> Cách 2: Dùng ID Apple chung</div>
+                    <div class="step-desc">
+                        Sử dụng tài khoản dưới đây để tải từ <strong>App Store</strong> (Tuyệt đối KHÔNG đăng nhập iCloud trong Cài đặt).
+                    </div>
+
+                    <div id="id-area" style="display:none;">
+                        <div id="loading-spinner" class="spinner"></div>
+                        <div id="id-list"></div>
+                        <button id="btn-loadmore" class="btn btn-loadmore" onclick="dataManager.loadMore()">
+                            Xem thêm tài khoản <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                    </div>
+
+                    <button id="btn-fetch" class="btn btn-primary" onclick="ui.openModal('warning-modal')">
+                        <i class="fa-solid fa-key"></i> Lấy Danh Sách ID
                     </button>
                 </div>
-
-                <button id="btn-fetch" class="btn btn-primary" onclick="ui.openModal('warning-modal')">
-                    <i class="fa-brands fa-apple"></i> Lấy Danh Sách ID
-                </button>
             </div>
 
             <div class="step-item">
@@ -303,45 +379,31 @@
                     <div class="step-badge">2</div>
                     <div class="step-title">Đăng Nhập Vào AppStore</div>
                 </div>
-                <div class="step-desc">
-                    Vào Appsore, chọn vào phần <strong>Tài Khoản</strong> (Góc Trên Bên Phải)
-                </div>
-                <div class="media-placeholder">
-                    <img src="https://i.ibb.co/nMv5sksY/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-1.png" >
-                </div>
-                <div class="step-desc">
-                    Kéo xuống dưới cùng, chọn <strong>Đăng Xuất</strong>
-                </div>
-                <div class="media-placeholder">
-                    <img src="https://i.ibb.co/ht51xBc/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-2.png" >
-                </div>
-                <div class="media-placeholder">
-                    <img src="https://i.ibb.co/xtBgj5QJ/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-3.png" >
-                </div>
-                <div class="step-desc">
-                    Sau đó kéo lại lên trên cùng và đăng nhập tài khoản bạn vừa lấy
-                </div>
-				<div class="step-desc">
-                    Lưu Ý: Một số máy sẽ hiện ra thông báo như hình dưới, bạn chỉ cần chọn dòng không phải ( như trên hình ) là được
-                </div>
-                <div class="media-placeholder">
-                    <i class="fa-brands fa-app-store-ios" style="font-size: 2rem; margin-bottom: 10px;"></i>
-                    <img src="https://i.ibb.co/7J4WbZ3k/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-6.png" >
-                </div>
-				<div class="step-desc">
-                    Bấm vào mục ứng dụng ( có thể hiển thị ngôn ngữ khác nhưng vị trí thì tương tự ảnh gốc )
-                </div>
-                <div class="media-placeholder">
-                    <img src="https://i.ibb.co/k65SYDs5/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-7.png" >
-                </div>
-				<div class="step-desc">
-                    Tìm ứng dụng <strong>Shadowrocket</strong>
-                </div>
-                <div class="media-placeholder">
-                    <img src="https://i.ibb.co/4ZNyd4mj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-9.png" >
-                </div>
-				<div class="step-desc">
-                    <strong>Lưu Ý</strong>: Một số Id Apple sẽ bị lỗi không tải được hoặc không có app, bạn vui lòng đổi lại id khác phía trên nhé
+                
+                <div class="accordion-box" style="background: rgba(0,0,0,0.3); border:none; margin-bottom: 0;">
+                    <div class="accordion-header" onclick="toggleAccordion(this)" style="padding: 10px; border-radius: 8px;">
+                        <span>Xem chi tiết các bước </span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="step-desc">Vào Appsore, chọn vào phần <strong>Tài Khoản</strong> (Góc Trên Bên Phải)</div>
+                        <div class="media-placeholder"><img src="https://i.ibb.co/nMv5sksY/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-1.png"></div>
+                        
+                        <div class="step-desc">Kéo xuống dưới cùng, chọn <strong>Đăng Xuất</strong></div>
+                        <div class="media-placeholder"><img src="https://i.ibb.co/ht51xBc/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-2.png"></div>
+                        <div class="media-placeholder"><img src="https://i.ibb.co/xtBgj5QJ/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-3.png"></div>
+                        
+                        <div class="step-desc">Sau đó kéo lại lên trên cùng và đăng nhập tài khoản bạn vừa lấy.</div>
+                        <div class="step-desc">Lưu Ý: Một số máy sẽ hiện ra thông báo như hình dưới, bạn chỉ cần chọn dòng không phải (như trên hình) là được.</div>
+                        <div class="media-placeholder"><img src="https://i.ibb.co/7J4WbZ3k/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-6.png"></div>
+                        
+                        <div class="step-desc">Bấm vào mục ứng dụng (có thể hiển thị ngôn ngữ khác nhưng vị trí thì tương tự ảnh gốc).</div>
+                        <div class="media-placeholder"><img src="https://i.ibb.co/k65SYDs5/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-7.png"></div>
+                        
+                        <div class="step-desc">Tìm ứng dụng <strong>Shadowrocket</strong></div>
+                        <div class="media-placeholder"><img src="https://i.ibb.co/4ZNyd4mj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-9.png"></div>
+                        <div class="step-desc"><strong>Lưu Ý</strong>: Một số Id Apple sẽ bị lỗi không tải được hoặc không có app, bạn vui lòng đổi lại id khác phía trên nhé.</div>
+                    </div>
                 </div>
             </div>
 
@@ -350,139 +412,73 @@
                     <div class="step-badge">3</div>
                     <div class="step-title">Cấu hình Shadowrocket</div>
                 </div>
-                <div class="step-desc">
-                    Sau khi đã tải thành công, bạn hãy vào app <strong>Shadowrocket</strong>
-                </div>
-                <div class="media-placeholder">
-                    <img src="https://i.ibb.co/zWHwS7DK/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-12.png" >
-                </div>
-                <div class="step-desc">
-                    Chọn vào mục <strong>Cấu Hình</strong>
-                </div>
-                <div class="media-placeholder">
-                    <img src="https://i.ibb.co/wF7xpHz6/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-13.png" >
-                </div>
-                <div class="step-desc">
-                    Chọn vào dấu <strong>+</strong> góc trên bên phải
-                </div>
-                <div class="media-placeholder">
-                    <img src="https://i.ibb.co/Gfbw6T1N/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-14.png" >
-                </div>
-                <div class="step-desc">
-                    Bạn Copy Link Sau Và Dán Vào <strong style="cursor:pointer; color: var(--primary); text-decoration: underline;" onclick="ui.copy('https://raw.githubusercontent.com/vuong2023/shad/main/modules/Locket_ohb.sgmodule')"> Nhấn vào đây để copy link</strong>
-                </div>
-                <div class="media-placeholder">
-                    <img src="https://i.ibb.co/DPx7hvj6/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-15.png" >
-                </div>
-                <div class="step-desc">
-                    Chọn vào chữ <strong>i</strong> của <strong>Locket_obh.conf</strong>
-                </div>
-                <div class="media-placeholder">
-                    <img src="https://i.ibb.co/1t56qPZX/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-16.png" >
-                </div>
-                <div class="step-desc">
-                    Chọn vào mục <strong>Giải mã HTTPS</strong>
-                </div>
-                <div class="media-placeholder">
-                    <img src="https://i.ibb.co/Kpf4CCsL/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-17.png" >
-                </div>
-                <div class="step-desc">
-                    Bật <strong>Giải mã HTTPS</strong>
-                </div>
-                <div class="media-placeholder">
-                    <img src="https://i.ibb.co/YThCq8qB/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-18.png" >
-                </div>
-                <div class="step-desc">
-                    Tạo chứng chỉ CA mới
-                </div>
-                <div class="media-placeholder">
-                    <img src="https://i.ibb.co/nN7gy68C/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-19.png" >
-                </div>
-                <div class="media-placeholder">
-                    <img src="https://i.ibb.co/8ChCvxj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-20.png" >
-                </div>
-                <div class="step-desc">
-                    Cài đặt Chứng chỉ CA và hệ thống
-                </div>
-                <div class="media-placeholder">
-                    <img src="https://i.ibb.co/ZR9FMJ53/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-21.png" >
-                </div>
-                <div class="media-placeholder">
-                    <img src="https://i.ibb.co/MyRfrXBr/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-22.png" >
-                </div>
-                <div class="media-placeholder">
-                    <img src="https://i.ibb.co/1JhzWyxW/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-23.png" >
-                </div>
-                <div class="step-desc">
-                    Vào <strong>cài đặt</strong> của máy -><strong>Cài đặt chung</strong>-><strong>Quản lý VPN & Thiết Bị</strong>
-                </div>
-                <div class="media-placeholder">
-                    <img src="https://i.ibb.co/v6xkfSsZ/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-24.png" >
-                </div>
-                <div class="media-placeholder">
-                    <img src="https://i.ibb.co/S4RJzb6w/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-25.png" >
-                </div>
-                <div class="step-desc">
-                    Chọn vào mục <strong>Shadowrocket</strong>
-                </div>
-                <div class="media-placeholder">
-                    <img src="https://i.ibb.co/4ZNyd4mj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-9.png" >
-                </div>
-                <div class="step-desc">
-                    <strong>Cài đặt</strong>, đến bước này thì nhập pass máy và bấm cài đặt thêm lần nữa
-                </div>
-                <div class="media-placeholder">
-                    <img src="https://i.ibb.co/4ZNyd4mj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-9.png" >
-                </div>
-                <div class="step-desc">
-                    Quay lại <strong>Cài đặt chung</strong>-><strong>Giới thiệu</strong>-><strong>Cài đặt tin cậy chứng nhận</strong>
-                </div>
-				<div class="media-placeholder">
-                    <img src="https://i.ibb.co/4ZNyd4mj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-9.png" >
-                </div>
-                <div class="step-desc">
-                    Bật <strong>Shadowrocket</strong> lên như trong hình
-                </div>
-				<div class="media-placeholder">
-                    <img src="https://i.ibb.co/4ZNyd4mj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-9.png" >
-                </div>
-                <div class="step-desc">
-                    Quay lại <strong>Shadowrocket</strong>
-                </div>
-				<div class="media-placeholder">
-                    <img src="https://i.ibb.co/4ZNyd4mj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-9.png" >
-                </div>
-				<div class="media-placeholder">
-                    <img src="https://i.ibb.co/4ZNyd4mj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-9.png" >
-                </div>
-				<div class="media-placeholder">
-                    <img src="https://i.ibb.co/4ZNyd4mj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-9.png" >
-                </div>
-				<div class="media-placeholder">
-                    <img src="https://i.ibb.co/4ZNyd4mj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-9.png" >
-                </div>
-				<div class="media-placeholder">
-                    <img src="https://i.ibb.co/4ZNyd4mj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-9.png" >
-                </div>
-				<div class="media-placeholder">
-                    <img src="https://i.ibb.co/4ZNyd4mj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-9.png" >
-                </div>
-				<div class="media-placeholder">
-                    <img src="https://i.ibb.co/4ZNyd4mj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-9.png" >
-                </div>
-				<div class="media-placeholder">
-                    <img src="https://i.ibb.co/4ZNyd4mj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-9.png" > 
+
+                <div class="accordion-box" style="background: rgba(0,0,0,0.3); border:none; margin-bottom: 0;">
+                    <div class="accordion-header" onclick="toggleAccordion(this)" style="padding: 10px; border-radius: 8px;">
+                        <span>Xem chi tiết cấu hình</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="step-desc">Sau khi đã tải thành công, bạn hãy vào app <strong>Shadowrocket</strong></div>
+                        <div class="media-placeholder"><img src="https://i.ibb.co/zWHwS7DK/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-12.png"></div>
+                        
+                        <div class="step-desc">Chọn vào mục <strong>Cấu Hình</strong> -> Chọn dấu <strong>+</strong> góc trên bên phải.</div>
+                        <div class="media-placeholder"><img src="https://i.ibb.co/wF7xpHz6/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-13.png"></div>
+                        <div class="media-placeholder"><img src="https://i.ibb.co/Gfbw6T1N/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-14.png"></div>
+                        
+                        <div class="step-desc">
+                            Copy link sau và dán vào: <strong style="cursor:pointer; color: var(--primary); text-decoration: underline;" onclick="ui.copy('https://raw.githubusercontent.com/vuong2023/shad/main/modules/Locket_ohb.sgmodule')">Nhấn vào đây để copy link</strong>
+                        </div>
+                        <div class="media-placeholder"><img src="https://i.ibb.co/DPx7hvj6/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-15.png"></div>
+                        
+                        <div class="step-desc">Chọn vào chữ <strong>i</strong> của <strong>Locket_obh.conf</strong> -> Chọn mục <strong>Giải mã HTTPS</strong> -> Bật lên.</div>
+                        <div class="media-placeholder"><img src="https://i.ibb.co/1t56qPZX/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-16.png"></div>
+                        <div class="media-placeholder"><img src="https://i.ibb.co/Kpf4CCsL/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-17.png"></div>
+                        <div class="media-placeholder"><img src="https://i.ibb.co/YThCq8qB/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-18.png"></div>
+                        
+                        <div class="step-desc">Tạo chứng chỉ CA mới -> Cài đặt chứng chỉ CA và hệ thống.</div>
+                        <div class="media-placeholder"><img src="https://i.ibb.co/nN7gy68C/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-19.png"></div>
+                        <div class="media-placeholder"><img src="https://i.ibb.co/8ChCvxj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-20.png"></div>
+                        <div class="media-placeholder"><img src="https://i.ibb.co/ZR9FMJ53/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-21.png"></div>
+                        <div class="media-placeholder"><img src="https://i.ibb.co/MyRfrXBr/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-22.png"></div>
+                        
+                        <div class="step-desc">Vào <strong>Cài đặt máy</strong> -> <strong>Cài đặt chung</strong> -> <strong>Quản lý VPN & Thiết Bị</strong> -> Chọn <strong>Shadowrocket</strong> -> Cài đặt.</div>
+                        <div class="media-placeholder"><img src="https://i.ibb.co/v6xkfSsZ/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-24.png"></div>
+                        <div class="media-placeholder"><img src="https://i.ibb.co/S4RJzb6w/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-25.png"></div>
+						<div class="media-placeholder"><img src="https://i.ibb.co/zhsgFxxk/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-26.png"></div>
+						<div class="media-placeholder"><img src="https://i.ibb.co/qFs7vpJF/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-27.png"></div>
+                        
+                        <div class="step-desc">Quay lại <strong>Cài đặt chung</strong> -> <strong>Giới thiệu</strong> -> <strong>Cài đặt tin cậy chứng nhận</strong> -> Bật Shadowrocket lên.</div>
+                        <div class="media-placeholder"><img src="https://i.ibb.co/pBqMvkwM/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-28.png"></div>
+						<div class="media-placeholder"><img src="https://i.ibb.co/qYdn1vCX/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-29.png"></div>
+						<div class="step-desc">Bật Shadowrocket Lên (Tốt nhất là bật hết tất cả mọi cái như trong hình )</div>
+						<div class="media-placeholder"><img src="https://i.ibb.co/FbWLmDsp/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-30.png"></div>
+						<div class="step-desc">Quay lại <strong>Shadowrocket</strong></div>
+						<div class="media-placeholder"><img src="https://i.ibb.co/2334y1zR/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-31.png"></div>
+						<div class="media-placeholder"><img src="https://i.ibb.co/HD7PHWXr/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-32.png"></div>
+						<div class="media-placeholder"><img src="https://i.ibb.co/KcTV3KL8/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-33.png"></div>
+						<div class="media-placeholder"><img src="https://i.ibb.co/ds9Nmn6z/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-34.png"></div>
+						<div class="media-placeholder"><img src="https://i.ibb.co/fVn67PNH/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-35.png"></div>
+						<div class="media-placeholder"><img src="https://i.ibb.co/xKhPRgZM/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-36.png"></div>
+						<div class="media-placeholder"><img src="https://i.ibb.co/NdsCW65q/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-37.png"></div>
+						<div class="media-placeholder"><img src="https://i.ibb.co/4nhkVVP5/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-38.png"></div>
+						<div class="step-desc">Sau khi làm xong các bước trên, bạn quay lại Locket, nếu vẫn chưa hiện Gold thì thoát Locket vào lại</div>
+                    </div>
                 </div>
             </div>
 
             <div class="step-item">
                 <div class="step-header">
                     <div class="step-badge">4</div>
-                    <div class="step-title">Cài Locket Gold (OTA)</div>
+                    <div class="step-title">Hạ cấp Locket</div>
                 </div>
-                <div class="step-desc">Sau khi bật VPN Shadowrocket, nhấn nút dưới đây và chọn "Cài đặt".</div>
+                <div class="step-desc">Sau khi bật VPN Shadowrocket, bạn đã có thể dùng Gold, tuy nhiên để tránh việc bạn luôn phải bật Shadowrocket thì bạn có thể cài bản Locket hạ cấp</div>
+				<div style="font-size: 0.8rem; color: #fca5a5; font-style: italic;">*Lưu ý: Contact với mình để được hướng dẫn hạ cấp Locket (có phí), nếu bạn không có nhu cầu có thể bỏ qua bước này vẫn sẽ dùng Locket một cách bình thường, khi cài bạn sẽ được tặng kèm thêm app Rổ Phim free nhé!</div>
                 <a id="link-ota" href="#" class="btn btn-success">
-                    <i class="fa-solid fa-cloud-arrow-down"></i> Cài Đặt Ngay (OTA)
+                    <i class="fa-solid fa-cloud-arrow-down"></i> Cài Đặt Locket
+                </a>
+                <a href="itms-services://?action=download-manifest&url=https://github.com/VannQuoc/LocketDowngrade/raw/main/RoPhim.plist" class="btn btn-purple" style="margin-bottom: 10px;">
+                    <i class="fa-solid fa-rocket"></i> Cài Đặt Rổ Phim
                 </a>
             </div>
         </section>
@@ -492,54 +488,35 @@
         <i class="fa-solid fa-heart"></i> <span>Donate</span>
     </div>
 
-	<div id="warning-modal" class="modal">
-		<div class="modal-box">
-
-			<div class="modal-icon" style="color: var(--danger);">
-				<i class="fa-solid fa-triangle-exclamation"></i>
-			</div>
-
-			<h3>CẢNH BÁO QUAN TRỌNG</h3>
-
-			<!-- ẢNH HƯỚNG DẪN -->
-			<div class="modal-media">
-				<img src="https://i.ibb.co/m5KNtrjh/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-39.png" alt="Hướng dẫn 1">
-				<img src="https://i.ibb.co/b5cH5J5m/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-10.png" alt="Hướng dẫn 2">
-				<img src="https://i.ibb.co/gbBp1TLm/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-11.png" alt="Hướng dẫn 3">
-			</div>
-
-			<ul class="modal-list">
-				<li><i class="fa-solid fa-check"></i> Chỉ đăng nhập trong <strong>App Store</strong>.</li>
-				<li><i class="fa-solid fa-xmark" style="color:var(--danger)"></i> KHÔNG đăng nhập iCloud trong Cài đặt.</li>
-				<li><i class="fa-solid fa-shield"></i> Nếu hỏi nâng cấp bảo mật → Chọn "Các Lựa Chọn Khác" → "Không Nâng Cấp".</li>
-			</ul>
-
-			<button class="btn btn-primary" onclick="dataManager.fetchIDs()">
-				Toi dong tinh
-			</button>
-
-			<button class="btn btn-outline"
-					style="margin-top:10px; width:100%; border:none;"
-					onclick="ui.closeModal('warning-modal')">
-				Huỷ bỏ
-			</button>
-
-		</div>
-	</div>
-
+    <div id="warning-modal" class="modal">
+        <div class="modal-box">
+            <div class="modal-icon" style="color: var(--danger);"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <h3>CẢNH BÁO QUAN TRỌNG</h3>
+            <div class="modal-media">
+                <img src="https://i.ibb.co/m5KNtrjh/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-39.png">
+                <img src="https://i.ibb.co/b5cH5J5m/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-10.png">
+                <img src="https://i.ibb.co/gbBp1TLm/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-11.png">
+            </div>
+            <ul class="modal-list">
+                <li><i class="fa-solid fa-check"></i> Chỉ đăng nhập trong <strong>App Store</strong>.</li>
+                <li><i class="fa-solid fa-xmark" style="color:var(--danger)"></i> KHÔNG đăng nhập iCloud trong Cài đặt.</li>
+                <li><i class="fa-solid fa-shield"></i> Nếu hỏi nâng cấp bảo mật → Chọn "Các Lựa Chọn Khác" → "Không Nâng Cấp".</li>
+            </ul>
+            <button class="btn btn-primary" onclick="dataManager.fetchIDs()">Tôi đồng ý</button>
+            <button class="btn btn-outline" style="margin-top:10px; width:100%; border:none;" onclick="ui.closeModal('warning-modal')">Huỷ bỏ</button>
+        </div>
+    </div>
 
     <div id="donate-modal" class="modal">
         <div class="modal-box" style="background: #fff; color: #333;">
             <h3 style="color:#000;">Cảm ơn bạn đã ủng hộ ❤️</h3>
             <p style="color:#666; font-size: 0.9rem;">Sự ủng hộ của bạn giúp mình duy trì Server.</p>
-            
             <div class="qr-area">
                 <img src="https://img.vietqr.io/image/mbbank-012345672110-compact.jpg?addInfo=donate%20locket%20gold&accountName=Le%20Van%20Quoc" alt="QR Code">
             </div>
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
                 <a href="https://page.momoapp.vn/YKuKJj4cVlc" class="btn" style="background:#d946ef; color:#fff; font-size:0.8rem;">Momo</a>
             </div>
-            
             <button class="btn btn-outline" style="margin-top:15px; width:100%; color:#555; border-color:#ddd;" onclick="ui.closeModal('donate-modal')">Đóng</button>
         </div>
     </div>
@@ -547,33 +524,19 @@
     <div id="toast"><i class="fa-solid fa-check-circle"></i> Đã sao chép vào bộ nhớ tạm!</div>
 
     <script>
-        /**
-         * --- CONFIGURATION (CẤU HÌNH) ---
-         * Bạn chỉnh sửa các thông số ở đây dễ dàng
-         */
+        // CONFIG
         const CONFIG = {
-            // Link Cloudflare Worker của bạn (Bắt buộc để lấy ID)
             workerUrl: 'https://locket.levanquocht21.workers.dev/', 
-            
-            // Link cài OTA (File plist)
             otaUrl: 'itms-services://?action=download-manifest&url=https://github.com/VannQuoc/LocketDowngrade/raw/main/manifest.plist',
-            
-            // Số tài khoản hiển thị mỗi lần bấm "Xem thêm"
             itemsPerBatch: 3
         };
-
-
         document.getElementById('link-ota').href = CONFIG.otaUrl;
 
-        /**
-         * --- NAVIGATION & UI MANAGER ---
-         */
+        // UI MANAGER
         const ui = {
             toastTimeout: null,
-
             openModal: (id) => document.getElementById(id).classList.add('active'),
             closeModal: (id) => document.getElementById(id).classList.remove('active'),
-
             showToast: (msg) => {
                 const t = document.getElementById('toast');
                 t.innerHTML = `<i class="fa-solid fa-check-circle"></i> ${msg}`;
@@ -581,7 +544,6 @@
                 clearTimeout(ui.toastTimeout);
                 ui.toastTimeout = setTimeout(() => t.classList.remove('show'), 3000);
             },
-
             copy: (text) => {
                 if (!text || text === "...") return;
                 navigator.clipboard.writeText(text).then(() => ui.showToast(`Đã chép: ${text}`))
@@ -589,12 +551,16 @@
             }
         };
 
+        // NAV MANAGER
         const nav = {
             to: (view) => {
                 document.getElementById('view-home').style.display = 'none';
                 document.querySelectorAll('.view-section').forEach(el => el.style.display = 'none');
                 document.getElementById('view-' + view).style.display = 'block';
                 window.scrollTo(0, 0);
+                
+                // KHI CHUYỂN TRANG -> CHECK DEVICE ĐỂ UPDATE LINK
+                checkDeviceAndSetLinks();
             },
             home: () => {
                 document.querySelectorAll('.view-section').forEach(el => el.style.display = 'none');
@@ -602,16 +568,57 @@
             }
         };
 
-        /**
-         * --- DATA MANAGER (Logic lấy ID) ---
-         */
+        // ACCORDION LOGIC
+        function toggleAccordion(element) {
+            const parent = element.parentElement;
+            parent.classList.toggle('active');
+        }
+
+        // DEVICE DETECTION LOGIC (MOBILE VS PC)
+        function checkDeviceAndSetLinks() {
+            // Regex check user agent mobile
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            
+            // Cấu hình link
+            const links = {
+                fb: {
+                    mobile: 'fb://profile/100071063622302',
+                    web: 'https://www.facebook.com/profile.php?id=100071063622302'
+                },
+                insta: {
+                    mobile: 'instagram://user?username=vannquoc.21',
+                    web: 'https://www.instagram.com/vannquoc.21/'
+                }
+            };
+
+            // Hàm set link cho thẻ a
+            const setLink = (id, type) => {
+                const el = document.getElementById(id);
+                if(el) {
+                    el.href = isMobile ? links[type].mobile : links[type].web;
+                    // Nếu là web thì mở tab mới, deeplink thì không cần
+                    if(!isMobile) el.setAttribute('target', '_blank');
+                    else el.removeAttribute('target');
+                }
+            };
+
+            // Set cho cả Android và iOS view
+            setLink('link-fb-android', 'fb');
+            setLink('link-insta-android', 'insta');
+            setLink('link-fb-ios', 'fb');
+            setLink('link-insta-ios', 'insta');
+            
+            // Log để kiểm tra (có thể xóa)
+            console.log("Device detected:", isMobile ? "Mobile" : "PC/Desktop");
+        }
+
+        // FETCH DATA MANAGER
         const dataManager = {
             allAccounts: [],
             currentShown: 0,
 
             fetchIDs: async () => {
                 ui.closeModal('warning-modal');
-                
                 const els = {
                     btn: document.getElementById('btn-fetch'),
                     area: document.getElementById('id-area'),
@@ -620,11 +627,7 @@
                     error: (msg) => els.list.innerHTML = `<div style="color:var(--danger); text-align:center;">${msg}</div>`
                 };
 
-                // Check Config
-                if (!CONFIG.workerUrl || CONFIG.workerUrl.includes('workers.dev') === false) {
-                    alert("Bạn chưa cấu hình link Worker trong code!");
-                    return;
-                }
+                if (!CONFIG.workerUrl) return;
 
                 els.btn.style.display = 'none';
                 els.area.style.display = 'block';
@@ -633,12 +636,11 @@
 
                 try {
                     const res = await fetch(CONFIG.workerUrl);
-                    if (!res.ok) throw new Error("Worker Error: " + res.status);
+                    if (!res.ok) throw new Error("Worker Error");
                     const html = await res.text();
-                    
                     dataManager.parseData(html);
                 } catch (e) {
-                    els.error(`Lỗi kết nối: ${e.message}. Vui lòng thử lại sau.`);
+                    els.error(`Lỗi kết nối: ${e.message}`);
                 } finally {
                     els.loader.style.display = 'none';
                 }
@@ -648,11 +650,9 @@
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(html, 'text/html');
                 const cards = doc.querySelectorAll('main div.bg-white.rounded-2xl');
-
                 dataManager.allAccounts = [];
 
                 cards.forEach((card, i) => {
-                    // 1. Username logic
                     let username = "...";
                     const uSpan = card.querySelector(`span[id^="user_"]`);
                     if (uSpan) {
@@ -660,22 +660,16 @@
                         username = cf ? dataManager.decodeCF(cf.getAttribute('data-cfemail')) : uSpan.innerText.trim();
                     }
 
-                    // 2. Password logic
                     let password = "Xem ở web gốc";
-                    // Tìm thẻ span có id chứa 'pass'
                     const pSpan = card.querySelector(`span[id*="pass"]`);
                     if(pSpan) password = pSpan.innerText.trim();
                     else {
-                        // Fallback: Tìm span thứ 2 trong card (thường là pass)
                         const spans = card.querySelectorAll('span');
                         spans.forEach(s => {
                             if(!s.id.includes('user') && s.innerText.length > 5) password = s.innerText.trim();
                         });
                     }
-
-                    // 3. Status logic
                     const isLive = card.innerText.includes("Hoạt động");
-
                     dataManager.allAccounts.push({ index: i+1, username, password, isLive });
                 });
 
@@ -683,7 +677,6 @@
                     document.getElementById('id-list').innerHTML = "Không tìm thấy dữ liệu.";
                     return;
                 }
-
                 dataManager.currentShown = 0;
                 document.getElementById('id-list').innerHTML = '';
                 dataManager.loadMore();
@@ -696,20 +689,17 @@
                 batch.forEach(acc => {
                     const statusClass = acc.isLive ? '' : 'status-offline';
                     const statusText = acc.isLive ? 'Hoạt động' : 'Bảo trì';
-                    
                     const html = `
                         <div class="id-card">
                             <div class="id-header">
                                 <span>Account #${acc.index}</span>
                                 <div><span class="status-dot ${statusClass}"></span>${statusText}</div>
                             </div>
-                            
                             <div class="copy-box">
                                 <div class="copy-icon"><i class="fa-solid fa-user"></i></div>
                                 <div class="copy-content">${acc.username}</div>
                                 <button class="copy-action" onclick="ui.copy('${acc.username}')"><i class="fa-regular fa-copy"></i></button>
                             </div>
-
                             <div class="copy-box" style="margin-bottom:0">
                                 <div class="copy-icon"><i class="fa-solid fa-key"></i></div>
                                 <div class="copy-content">${acc.password}</div>
@@ -721,8 +711,6 @@
                 });
 
                 dataManager.currentShown += batch.length;
-                
-                // Toggle Button Load More
                 const btn = document.getElementById('btn-loadmore');
                 btn.style.display = (dataManager.currentShown >= dataManager.allAccounts.length) ? 'none' : 'block';
             },
@@ -736,6 +724,9 @@
                 return e;
             }
         };
+
+        // Chạy check lần đầu
+        checkDeviceAndSetLinks();
     </script>
 </body>
 </html>
