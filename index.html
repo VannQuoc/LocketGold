@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VannQuocIsMe-Locket Gold Installer</title>
+    <title>Locket Gold Installer - Premium Unlock</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -107,7 +107,7 @@
         /* --- 5. MEDIA PLACEHOLDER (Ảnh/Video) --- */
         .media-placeholder {
             width: 100%;
-            height: 180px; /* Chiều cao cố định hoặc auto */
+            height: auto; /* Chiều cao cố định hoặc auto */
             background: rgba(0,0,0,0.3);
             border-radius: 12px;
             border: 1px dashed var(--glass-border);
@@ -190,6 +190,20 @@
         .modal-list li i { color: var(--primary); margin-top: 4px; }
         
         /* QR Code Area */
+		.modal-media {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 8px;
+		margin: 12px 0;
+		}
+
+		.modal-media img {
+			width: 100%;
+			border-radius: 6px;
+			object-fit: cover;
+			cursor: pointer;
+		}
+
         .qr-area {
             background: #fff; padding: 10px; border-radius: 12px; margin: 20px auto;
             width: 200px; height: 200px; display: flex; align-items: center; justify-content: center;
@@ -218,14 +232,14 @@
     <div class="app-container">
         <header>
             <div class="logo-icon"><i class="fa-solid fa-bolt"></i></div>
-            <h1 class="app-title">Locket Gold Installer</h1>
-            <p class="app-desc">Hướng dẫn cài đặt & Mở khoá Premium miễn phí</p>
+            <h1 class="app-title">VannQuocIsMe-Locket Gold Installer</h1>
+            <p class="app-desc">Locket Gold By VannQuocIsMe</p>
         </header>
 
         <div id="view-home" class="platform-grid">
             <div class="platform-card ios" onclick="nav.to('ios')">
                 <i class="fab fa-apple"></i>
-                <div class="platform-label">iPhone / iPad</div>
+                <div class="platform-label">iPhone / iPad (Ios)</div>
             </div>
             <div class="platform-card android" onclick="nav.to('android')">
                 <i class="fab fa-android"></i>
@@ -239,10 +253,10 @@
             <div class="step-item">
                 <div class="step-header">
                     <div class="step-badge">1</div>
-                    <div class="step-title">Tải File APK Mod</div>
+                    <div class="step-title">Tải File APK</div>
                 </div>
                 <div class="step-desc">Tải file cài đặt đã được mở khóa tính năng Locket Gold sẵn.</div>
-                <a href="#" class="btn btn-primary"><i class="fa-solid fa-download"></i> Tải APK Ngay</a>
+                <a href="https://drive.google.com/file/d/1bsEiGTNOdbVcpgXPZ9JUOPwQUmbCX0QE/view?usp=drive_link" class="btn btn-primary"><i class="fa-solid fa-download"></i> Tải APK Ngay</a>
             </div>
 
             <div class="step-item">
@@ -254,7 +268,7 @@
                 
                 <div class="media-placeholder">
                     <i class="fa-regular fa-image" style="font-size: 2rem; margin-bottom: 10px;"></i>
-                    <span>(Chỗ để ảnh/video hướng dẫn cài APK)</span>
+                    <img src="https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2023/11/app-apk-7.jpg.webp" style="max-width: 100%; height: auto; border-radius: 8px;">
                 </div>
             </div>
         </section>
@@ -265,7 +279,7 @@
             <div class="step-item">
                 <div class="step-header">
                     <div class="step-badge">1</div>
-                    <div class="step-title">Lấy ID Apple & Tải Shadowrocket</div>
+                    <div class="step-title">Lấy ID Apple</div>
                 </div>
                 <div class="step-desc">
                     Sử dụng tài khoản dưới đây để đăng nhập <strong>App Store</strong> (Tuyệt đối KHÔNG đăng nhập iCloud trong Cài đặt).
@@ -287,14 +301,47 @@
             <div class="step-item">
                 <div class="step-header">
                     <div class="step-badge">2</div>
-                    <div class="step-title">Tải Shadowrocket</div>
+                    <div class="step-title">Đăng Nhập Vào AppStore</div>
                 </div>
                 <div class="step-desc">
-                    Vào mục <strong>Đã mua (Purchased)</strong> -> Tìm "Shadowrocket" -> Tải về máy.
+                    Vào Appsore, chọn vào phần <strong>Tài Khoản</strong> (Góc Trên Bên Phải)
+                </div>
+                <div class="media-placeholder">
+                    <img src="https://i.ibb.co/nMv5sksY/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-1.png" >
+                </div>
+                <div class="step-desc">
+                    Kéo xuống dưới cùng, chọn <strong>Đăng Xuất</strong>
+                </div>
+                <div class="media-placeholder">
+                    <img src="https://i.ibb.co/ht51xBc/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-2.png" >
+                </div>
+                <div class="media-placeholder">
+                    <img src="https://i.ibb.co/xtBgj5QJ/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-3.png" >
+                </div>
+                <div class="step-desc">
+                    Sau đó kéo lại lên trên cùng và đăng nhập tài khoản bạn vừa lấy
+                </div>
+				<div class="step-desc">
+                    Lưu Ý: Một số máy sẽ hiện ra thông báo như hình dưới, bạn chỉ cần chọn dòng không phải ( như trên hình ) là được
                 </div>
                 <div class="media-placeholder">
                     <i class="fa-brands fa-app-store-ios" style="font-size: 2rem; margin-bottom: 10px;"></i>
-                    <span>(Ảnh hướng dẫn vào mục Đã mua)</span>
+                    <img src="https://i.ibb.co/7J4WbZ3k/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-6.png" >
+                </div>
+				<div class="step-desc">
+                    Bấm vào mục ứng dụng ( có thể hiển thị ngôn ngữ khác nhưng vị trí thì tương tự ảnh gốc )
+                </div>
+                <div class="media-placeholder">
+                    <img src="https://i.ibb.co/k65SYDs5/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-7.png" >
+                </div>
+				<div class="step-desc">
+                    Tìm ứng dụng <strong>Shadowrocket</strong>
+                </div>
+                <div class="media-placeholder">
+                    <img src="https://i.ibb.co/4ZNyd4mj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-9.png" >
+                </div>
+				<div class="step-desc">
+                    <strong>Lưu Ý</strong>: Một số Id Apple sẽ bị lỗi không tải được hoặc không có app, bạn vui lòng đổi lại id khác phía trên nhé
                 </div>
             </div>
 
@@ -304,11 +351,127 @@
                     <div class="step-title">Cấu hình Shadowrocket</div>
                 </div>
                 <div class="step-desc">
-                    Mở app, nhấn vào nút quét QR hoặc thêm cấu hình bên dưới. Đảm bảo bật VPN.
+                    Sau khi đã tải thành công, bạn hãy vào app <strong>Shadowrocket</strong>
                 </div>
                 <div class="media-placeholder">
-                    <i class="fa-solid fa-rocket" style="font-size: 2rem; margin-bottom: 10px;"></i>
-                    <span>(Ảnh/Video hướng dẫn cấu hình App)</span>
+                    <img src="https://i.ibb.co/zWHwS7DK/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-12.png" >
+                </div>
+                <div class="step-desc">
+                    Chọn vào mục <strong>Cấu Hình</strong>
+                </div>
+                <div class="media-placeholder">
+                    <img src="https://i.ibb.co/wF7xpHz6/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-13.png" >
+                </div>
+                <div class="step-desc">
+                    Chọn vào dấu <strong>+</strong> góc trên bên phải
+                </div>
+                <div class="media-placeholder">
+                    <img src="https://i.ibb.co/Gfbw6T1N/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-14.png" >
+                </div>
+                <div class="step-desc">
+                    Bạn Copy Link Sau Và Dán Vào <strong style="cursor:pointer; color: var(--primary); text-decoration: underline;" onclick="ui.copy('https://raw.githubusercontent.com/vuong2023/shad/main/modules/Locket_ohb.sgmodule')"> Nhấn vào đây để copy link</strong>
+                </div>
+                <div class="media-placeholder">
+                    <img src="https://i.ibb.co/DPx7hvj6/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-15.png" >
+                </div>
+                <div class="step-desc">
+                    Chọn vào chữ <strong>i</strong> của <strong>Locket_obh.conf</strong>
+                </div>
+                <div class="media-placeholder">
+                    <img src="https://i.ibb.co/1t56qPZX/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-16.png" >
+                </div>
+                <div class="step-desc">
+                    Chọn vào mục <strong>Giải mã HTTPS</strong>
+                </div>
+                <div class="media-placeholder">
+                    <img src="https://i.ibb.co/Kpf4CCsL/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-17.png" >
+                </div>
+                <div class="step-desc">
+                    Bật <strong>Giải mã HTTPS</strong>
+                </div>
+                <div class="media-placeholder">
+                    <img src="https://i.ibb.co/YThCq8qB/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-18.png" >
+                </div>
+                <div class="step-desc">
+                    Tạo chứng chỉ CA mới
+                </div>
+                <div class="media-placeholder">
+                    <img src="https://i.ibb.co/nN7gy68C/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-19.png" >
+                </div>
+                <div class="media-placeholder">
+                    <img src="https://i.ibb.co/8ChCvxj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-20.png" >
+                </div>
+                <div class="step-desc">
+                    Cài đặt Chứng chỉ CA và hệ thống
+                </div>
+                <div class="media-placeholder">
+                    <img src="https://i.ibb.co/ZR9FMJ53/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-21.png" >
+                </div>
+                <div class="media-placeholder">
+                    <img src="https://i.ibb.co/MyRfrXBr/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-22.png" >
+                </div>
+                <div class="media-placeholder">
+                    <img src="https://i.ibb.co/1JhzWyxW/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-23.png" >
+                </div>
+                <div class="step-desc">
+                    Vào <strong>cài đặt</strong> của máy -><strong>Cài đặt chung</strong>-><strong>Quản lý VPN & Thiết Bị</strong>
+                </div>
+                <div class="media-placeholder">
+                    <img src="https://i.ibb.co/v6xkfSsZ/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-24.png" >
+                </div>
+                <div class="media-placeholder">
+                    <img src="https://i.ibb.co/S4RJzb6w/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-25.png" >
+                </div>
+                <div class="step-desc">
+                    Chọn vào mục <strong>Shadowrocket</strong>
+                </div>
+                <div class="media-placeholder">
+                    <img src="https://i.ibb.co/4ZNyd4mj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-9.png" >
+                </div>
+                <div class="step-desc">
+                    <strong>Cài đặt</strong>, đến bước này thì nhập pass máy và bấm cài đặt thêm lần nữa
+                </div>
+                <div class="media-placeholder">
+                    <img src="https://i.ibb.co/4ZNyd4mj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-9.png" >
+                </div>
+                <div class="step-desc">
+                    Quay lại <strong>Cài đặt chung</strong>-><strong>Giới thiệu</strong>-><strong>Cài đặt tin cậy chứng nhận</strong>
+                </div>
+				<div class="media-placeholder">
+                    <img src="https://i.ibb.co/4ZNyd4mj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-9.png" >
+                </div>
+                <div class="step-desc">
+                    Bật <strong>Shadowrocket</strong> lên như trong hình
+                </div>
+				<div class="media-placeholder">
+                    <img src="https://i.ibb.co/4ZNyd4mj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-9.png" >
+                </div>
+                <div class="step-desc">
+                    Quay lại <strong>Shadowrocket</strong>
+                </div>
+				<div class="media-placeholder">
+                    <img src="https://i.ibb.co/4ZNyd4mj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-9.png" >
+                </div>
+				<div class="media-placeholder">
+                    <img src="https://i.ibb.co/4ZNyd4mj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-9.png" >
+                </div>
+				<div class="media-placeholder">
+                    <img src="https://i.ibb.co/4ZNyd4mj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-9.png" >
+                </div>
+				<div class="media-placeholder">
+                    <img src="https://i.ibb.co/4ZNyd4mj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-9.png" >
+                </div>
+				<div class="media-placeholder">
+                    <img src="https://i.ibb.co/4ZNyd4mj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-9.png" >
+                </div>
+				<div class="media-placeholder">
+                    <img src="https://i.ibb.co/4ZNyd4mj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-9.png" >
+                </div>
+				<div class="media-placeholder">
+                    <img src="https://i.ibb.co/4ZNyd4mj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-9.png" >
+                </div>
+				<div class="media-placeholder">
+                    <img src="https://i.ibb.co/4ZNyd4mj/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-9.png" > 
                 </div>
             </div>
 
@@ -329,19 +492,41 @@
         <i class="fa-solid fa-heart"></i> <span>Donate</span>
     </div>
 
-    <div id="warning-modal" class="modal">
-        <div class="modal-box">
-            <div class="modal-icon" style="color: var(--danger);"><i class="fa-solid fa-triangle-exclamation"></i></div>
-            <h3>CẢNH BÁO QUAN TRỌNG</h3>
-            <ul class="modal-list">
-                <li><i class="fa-solid fa-check"></i> Chỉ đăng nhập trong <strong>App Store</strong>.</li>
-                <li><i class="fa-solid fa-xmark" style="color:var(--danger)"></i> KHÔNG đăng nhập iCloud trong Cài đặt.</li>
-                <li><i class="fa-solid fa-shield"></i> Nếu hỏi nâng cấp bảo mật -> Chọn "Không".</li>
-            </ul>
-            <button class="btn btn-primary" onclick="dataManager.fetchIDs()">Tôi đã hiểu, Lấy ID ngay</button>
-            <button class="btn btn-outline" style="margin-top:10px; width:100%; border:none;" onclick="ui.closeModal('warning-modal')">Huỷ bỏ</button>
-        </div>
-    </div>
+	<div id="warning-modal" class="modal">
+		<div class="modal-box">
+
+			<div class="modal-icon" style="color: var(--danger);">
+				<i class="fa-solid fa-triangle-exclamation"></i>
+			</div>
+
+			<h3>CẢNH BÁO QUAN TRỌNG</h3>
+
+			<!-- ẢNH HƯỚNG DẪN -->
+			<div class="modal-media">
+				<img src="https://i.ibb.co/m5KNtrjh/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-39.png" alt="Hướng dẫn 1">
+				<img src="https://i.ibb.co/b5cH5J5m/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-10.png" alt="Hướng dẫn 2">
+				<img src="https://i.ibb.co/gbBp1TLm/N-i-dung-o-n-v-n-b-n-c-a-b-n-zip-11.png" alt="Hướng dẫn 3">
+			</div>
+
+			<ul class="modal-list">
+				<li><i class="fa-solid fa-check"></i> Chỉ đăng nhập trong <strong>App Store</strong>.</li>
+				<li><i class="fa-solid fa-xmark" style="color:var(--danger)"></i> KHÔNG đăng nhập iCloud trong Cài đặt.</li>
+				<li><i class="fa-solid fa-shield"></i> Nếu hỏi nâng cấp bảo mật → Chọn "Các Lựa Chọn Khác" → "Không Nâng Cấp".</li>
+			</ul>
+
+			<button class="btn btn-primary" onclick="dataManager.fetchIDs()">
+				Toi dong tinh
+			</button>
+
+			<button class="btn btn-outline"
+					style="margin-top:10px; width:100%; border:none;"
+					onclick="ui.closeModal('warning-modal')">
+				Huỷ bỏ
+			</button>
+
+		</div>
+	</div>
+
 
     <div id="donate-modal" class="modal">
         <div class="modal-box" style="background: #fff; color: #333;">
@@ -351,11 +536,8 @@
             <div class="qr-area">
                 <img src="https://img.vietqr.io/image/mbbank-012345672110-compact.jpg?addInfo=donate%20locket%20gold&accountName=Le%20Van%20Quoc" alt="QR Code">
             </div>
-
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                <a href="https://dl.vietqr.io/pay?app=mb&ba=012345672110@mb" class="btn" style="background:#1e3a8a; color:#fff; font-size:0.8rem;">MB Bank</a>
-                <a href="https://dl.vietqr.io/pay?app=vcb&ba=012345672110@mb" class="btn" style="background:#1e3a8a; color:#fff; font-size:0.8rem;">Vietcombank></a>
-                <a href="#" class="btn" style="background:#d946ef; color:#fff; font-size:0.8rem;">Momo</a>
+                <a href="https://page.momoapp.vn/YKuKJj4cVlc" class="btn" style="background:#d946ef; color:#fff; font-size:0.8rem;">Momo</a>
             </div>
             
             <button class="btn btn-outline" style="margin-top:15px; width:100%; color:#555; border-color:#ddd;" onclick="ui.closeModal('donate-modal')">Đóng</button>
@@ -556,5 +738,4 @@
         };
     </script>
 </body>
-
 </html>
